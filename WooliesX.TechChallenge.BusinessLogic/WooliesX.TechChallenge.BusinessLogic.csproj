@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\WooliesX.TechChallenge.Entities\WooliesX.TechChallenge.Entities.csproj" />
+    <ProjectReference Include="..\WooliesX.TechChallenge.Services\WooliesX.TechChallenge.Services.csproj" />
+  </ItemGroup>
+
+</Project>
