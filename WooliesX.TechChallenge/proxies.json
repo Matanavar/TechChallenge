@@ -3,7 +3,7 @@
   "proxies": {
     "proxy1": {
       "matchCondition": {
-        "methods": [ "GET" ],        
+        "methods": [ "GET" ],
         "route": "/api/answers"
       },
       "backendUri": "https://wooliesxtechchallenge20201210174053.azurewebsites.net/api/answers/user"

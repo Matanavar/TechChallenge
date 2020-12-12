@@ -20,18 +20,33 @@ namespace WooliesX.TechChallenge
         {
             _productManager = productManager;
         }
-
+        /// <summary>
+        /// Azure function to sort products based on sortOption
+        /// </summary>
+        /// <param name="req"></param>
+        /// <param name="log"></param>
+        /// <returns></returns>
         [FunctionName("GetProducts")]
         public async Task<IActionResult> Run(
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "sort")] HttpRequest req,
              ILogger log)
-        {            
-            string sortOption = req.Query["sortOption"];
+        {
+            try
+            {                 
+                string sortOption = req.Query["sortOption"];
 
-            SortEnum sortVal = sortOption==null? SortEnum.High: (SortEnum)Enum.Parse(typeof(SortEnum), sortOption);
+                SortEnum sortVal = sortOption == null ? SortEnum.High : (SortEnum)Enum.Parse(typeof(SortEnum), sortOption);
 
-            var responseMessage = _productManager.GetProducts(sortVal);
-            return new OkObjectResult(responseMessage);
+                var responseMessage = _productManager.GetProducts(sortVal);
+                return new OkObjectResult(responseMessage);
+            }            
+            catch(Exception ex)
+            {
+                var result = new ObjectResult("Error Occured");
+                result.StatusCode = StatusCodes.Status500InternalServerError;
+                return result;
+            }
+
         }
     }
 }

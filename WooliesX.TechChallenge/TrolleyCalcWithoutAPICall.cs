@@ -22,6 +22,12 @@ namespace WooliesX.TechChallenge
             _productManager = productManager;
         }
 
+        /// <summary>
+        /// Azure Function to calculate the trolley total 
+        /// </summary>
+        /// <param name="req"></param>
+        /// <param name="log"></param>
+        /// <returns></returns>
         [FunctionName("TrolleyCalcWithoutAPI")]
         public async Task<IActionResult> Run(
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = "trolleyCalcWithoutAPI")] HttpRequest req,

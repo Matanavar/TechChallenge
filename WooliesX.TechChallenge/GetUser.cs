@@ -20,6 +20,12 @@ namespace WooliesX.TechChallenge
             _userManager = userManager;
         }
 
+        /// <summary>
+        /// Azure Function to return User details
+        /// </summary>
+        /// <param name="req"></param>
+        /// <param name="log"></param>
+        /// <returns></returns>
         [FunctionName("GetUser")]
         public  async Task<IActionResult> Run(
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "answers/user")] HttpRequest req,

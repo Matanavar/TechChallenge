@@ -54,6 +54,10 @@ namespace WooliesX.TechChallenge.Entities
         public static List<Product> Sort(List<Product> products, SortEnum sortVal)
         {
             List<Product> sortedProductList;
+            if(products == null)
+            {
+                throw new ArgumentNullException("Not Valid");
+            }
             switch (sortVal)
             {
                 case SortEnum.Low:

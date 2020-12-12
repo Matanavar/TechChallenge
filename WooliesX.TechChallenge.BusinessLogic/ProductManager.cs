@@ -16,13 +16,20 @@ namespace WooliesX.TechChallenge.BusinessLogic
             _resourceService = resourceService;
         }
 
+        /// <summary>
+        /// Trolley Total Calculation calling /resource/trolleyCalculator api
+        /// </summary>
+        /// <param name="req"></param>
+        /// <returns></returns>
         public decimal GetTrolleyTotal(TrolleyCalc req)
         {
-           return _resourceService.TrolleyCalculate(req);
+            decimal result;
+            result = _resourceService.TrolleyCalculate(req);
+            return result;
         }
 
         /// <summary>
-        /// Calculation without calling /resource/trolleyCalculator api
+        /// Trolley Total Calculation without calling /resource/trolleyCalculator api
         /// </summary>
         /// <param name="req"></param>
         /// <returns></returns>
@@ -52,26 +59,15 @@ namespace WooliesX.TechChallenge.BusinessLogic
             return 0;
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        /// <summary>
+        /// product list based on Sort Option
+        /// </summary>
+        /// <param name="sortValue"></param>
+        /// <returns></returns>
         public List<Product> GetProducts(SortEnum sortValue)
         {
             List<Product> productList = null;
+            
             if (sortValue == SortEnum.Recommended)
             {
                 productList = GetSortedRecommendedProducts();
@@ -85,50 +81,50 @@ namespace WooliesX.TechChallenge.BusinessLogic
         }
 
 
-
-
-
-
-
-
-
-
-
-
-
         private List<Product> GetSortedRecommendedProducts()
         {
             var shopperHistory = _resourceService.GetShopperHistory();
-            var productList = new Dictionary<string, SoldProduct>();
+            var productList = new List<Product>();
 
             if (shopperHistory != null && shopperHistory.Count > 0)
             {
-                foreach(ShopperHistory shistory in shopperHistory)
+                foreach (ShopperHistory shistory in shopperHistory)
                 {
-                    foreach(Product p in shistory.Products)
+                    foreach (Product p in shistory.Products)
                     {
-                        if(productList.ContainsKey(p.Name))
+                        if (productList.Exists(x => x.Name == p.Name))
                         {
-                            productList[p.Name].Quantity += p.Quantity;
-                            productList[p.Name].SoldCount++;
+                            var productItem = productList.Where(x => x.Name == p.Name).Select(u => { u.Quantity += p.Quantity; return u; }).ToList();
+                            productList[productList.FindIndex(ind => ind.Name == p.Name)] = productItem[0];                    
+
                         }
                         else
                         {
-                            productList.Add(p.Name, new SoldProduct(p, 1));
+                            productList.Add(p);
                         }
                     }
                 }
             }
 
-            return productList.Values.ToList().OrderByDescending(p => p.SoldCount).ThenByDescending(p => p.Quantity)
-                .Select(p => p.baseProduct()).ToList();
-                
+            return productList.OrderByDescending(p => p.Quantity).ToList();
+
         }
 
         private List<Product> GetProducts()
         {
             return _resourceService.GetProducts();
         }
+
+
+
+
+
+
+
+
+
+
+
 
 
     }

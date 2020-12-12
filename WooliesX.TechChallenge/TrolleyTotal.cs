@@ -20,16 +20,32 @@ namespace WooliesX.TechChallenge
         {
             _productManager = productManager;
         }
+
+        /// <summary>
+        /// Azure Function to return TrolleyTotal
+        /// </summary>
+        /// <param name="req"></param>
+        /// <param name="log"></param>
+        /// <returns></returns>
         [FunctionName("TrolleyTotal")]
         public async Task<IActionResult> Run(
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] HttpRequest req,
             ILogger log)
         {
-            string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
-            var reqProduct = JsonConvert.DeserializeObject<TrolleyCalc>(requestBody);
+            try
+            {
+                string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
+                var reqProduct = JsonConvert.DeserializeObject<TrolleyCalc>(requestBody);
 
-            var responseMsg = _productManager.GetTrolleyTotal(reqProduct);
-            return new OkObjectResult(responseMsg);
+                var responseMsg = _productManager.GetTrolleyTotal(reqProduct);
+                return new OkObjectResult(responseMsg);
+            }
+            catch (Exception ex)
+            {
+                var result = new ObjectResult("Error Occured");
+                result.StatusCode = StatusCodes.Status500InternalServerError;
+                return result;
+            }
         }
     }
 }
