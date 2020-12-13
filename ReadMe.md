@@ -6,7 +6,8 @@
 ## How to build 
 Open the solution in VS 2019. Make "WooliesX.TechChallenge" as the "startup project" and run. This should build the solution and display the URLs as below.
 
-![](AzureFunctionURLs_Local.png)
+![](https://github.com/Matanavar/TechChallenge/blob/master/AzureFunctionURLs_Local.PNG)
+
 The Azure Functions can be run locally with these URLs.
 
 ----
