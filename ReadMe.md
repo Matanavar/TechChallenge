@@ -15,14 +15,14 @@ The Azure Functions can be run locally with these URLs.
 ## Tech Challenge 
 These Functions are hosted in Azure cloud and can be access with the below urls. 
                 
-### Excercise 1
+### Exercise 1
  `<link>` : https://wooliesxtechchallenge20201210174053.azurewebsites.net/api/answers
-### Excercise 2
+### Exercise 2
 `<link>` : https://wooliesxtechchallenge20201210174053.azurewebsites.net/api/sort?
 
 (PS: Recommended sort seems to have failed the tests, need more clarification on the expected output.) 
 
-### Excercise 3
+### Exercise 3
 `<link>` : https://wooliesxtechchallenge20201210174053.azurewebsites.net/api/TrolleyTotal?
 
 ----
