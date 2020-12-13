@@ -1,7 +1,7 @@
  
 <!--Read Me file --> 
 
-# WooliesX Technical Challenge
+# Technical Challenge
 
 ## How to build 
 Open the solution in VS 2019. Make "WooliesX.TechChallenge" as the "startup project" and run. This should build the solution and display the URLs as below.
