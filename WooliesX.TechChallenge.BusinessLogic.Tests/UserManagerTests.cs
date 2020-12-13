@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using WooliesX.TechChallenge.Entities;
 using Xunit;
 
 namespace WooliesX.TechChallenge.BusinessLogic.Tests
