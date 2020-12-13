@@ -4,7 +4,7 @@ using System.Text;
 
 namespace WooliesX.TechChallenge.Entities
 {
-    public class Quant
+    public class Quantityy
     {
         public string Name { get; set; }
         public int Quantity { get; set; }

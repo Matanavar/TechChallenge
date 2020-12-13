@@ -27,13 +27,22 @@ namespace WooliesX.TechChallenge
         /// <param name="log"></param>
         /// <returns></returns>
         [FunctionName("GetUser")]
-        public  async Task<IActionResult> Run(
+        public async Task<IActionResult> Run(
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "answers/user")] HttpRequest req,
             ILogger log)
         {
-            var responseMessage = _userManager.GetUser();
+            try
+            {
+                var responseMessage = _userManager.GetUser();
 
-            return new OkObjectResult(responseMessage);
+                return new OkObjectResult(responseMessage);
+            }
+            catch (Exception ex)
+            {
+                var result = new ObjectResult("Error Occured");
+                result.StatusCode = StatusCodes.Status500InternalServerError;
+                return result;
+            }
         }
     }
 }

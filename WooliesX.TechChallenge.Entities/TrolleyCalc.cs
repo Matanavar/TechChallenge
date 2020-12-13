@@ -8,7 +8,7 @@ namespace WooliesX.TechChallenge.Entities
     {
         public List<Product> Products { get; set; }
         public List<ProductSpecials> Specials { get; set; }
-        public List<Quant> Quantities { get; set; }
+        public List<Quantityy> Quantities { get; set; }
        
     }
        

@@ -23,7 +23,7 @@ namespace WooliesX.TechChallenge.BusinessLogic
         /// <returns></returns>
         public decimal GetTrolleyTotal(TrolleyCalc req)
         {
-            decimal result;
+            decimal result;             
             result = _resourceService.TrolleyCalculate(req);
             return result;
         }
@@ -35,7 +35,22 @@ namespace WooliesX.TechChallenge.BusinessLogic
         /// <returns></returns>
         public decimal GetTrolleyTotalWithoutAPICall(TrolleyCalc req)
         {
-            int requiredQuantity = req.Quantities[0].Quantity;
+            List<Dictionary<string, decimal>> productPrices = new List<Dictionary<string, decimal>>();
+
+            foreach (var item in req.Products)
+            {
+                productPrices.Add(new Dictionary<string, decimal> { { item.Name, item.Price } });
+            }
+
+            List<Dictionary<string, int>> requiredQuantities = new List<Dictionary<string, int>>();
+
+            foreach (var item in req.Quantities)
+            {
+                requiredQuantities.Add(new Dictionary<string, int> { { item.Name, item.Quantity } });
+            }           
+
+
+          int requiredQuantity = req.Quantities[0].Quantity;
             int specialQuantity = req.Specials[0].Quantities[0].Quantity;
             decimal specialTotalPrice = req.Specials[0].Total;
             decimal productPrice = req.Products[0].Price;

@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -38,6 +39,10 @@ namespace WooliesX.TechChallenge.Services
                     var json = httpResponse.Content.ReadAsStringAsync().Result;
                     return JsonConvert.DeserializeObject<T>(json);
                 }
+            }
+            catch (HttpRequestException ex)
+            {                
+                throw ex;
             }
             catch (Exception ex)
             {

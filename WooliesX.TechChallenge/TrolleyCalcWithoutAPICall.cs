@@ -33,11 +33,26 @@ namespace WooliesX.TechChallenge
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = "trolleyCalcWithoutAPI")] HttpRequest req,
             ILogger log)
         {
-            string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
-            var reqProduct = JsonConvert.DeserializeObject<TrolleyCalc>(requestBody);
+            try
+            {
+                string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
+                var reqProduct = JsonConvert.DeserializeObject<TrolleyCalc>(requestBody);
 
-            var responseMsg = _productManager.GetTrolleyTotalWithoutAPICall(reqProduct);
-            return new OkObjectResult(responseMsg);
+                var responseMsg = _productManager.GetTrolleyTotalWithoutAPICall(reqProduct);
+                return new OkObjectResult(responseMsg);
+            }
+            catch (JsonException ex)
+            {
+                var result = new ObjectResult(((Newtonsoft.Json.JsonReaderException)ex).Path + " : Invalid input");
+                result.StatusCode = StatusCodes.Status400BadRequest;
+                return result;
+            }
+            catch (Exception ex)
+            {
+                var result = new ObjectResult("Error Occured");
+                result.StatusCode = StatusCodes.Status500InternalServerError;
+                return result;
+            }
         }
     }
 

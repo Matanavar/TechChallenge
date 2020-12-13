@@ -40,6 +40,12 @@ namespace WooliesX.TechChallenge
                 var responseMsg = _productManager.GetTrolleyTotal(reqProduct);
                 return new OkObjectResult(responseMsg);
             }
+            catch (JsonException ex)
+            {
+                var result = new ObjectResult(((Newtonsoft.Json.JsonReaderException)ex).Path + " : Invalid input");
+                result.StatusCode = StatusCodes.Status400BadRequest;
+                return result;
+            }
             catch (Exception ex)
             {
                 var result = new ObjectResult("Error Occured");
