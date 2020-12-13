@@ -22,7 +22,7 @@ These Functions are hosted in Azure cloud and can be access with the below urls.
 
 (PS: Recommended sort seems to have failed the tests, need more clarification on the expected output.) 
 
-Excercise 3
+### Excercise 3
 `<link>` : https://wooliesxtechchallenge20201210174053.azurewebsites.net/api/TrolleyTotal?
 
 ----
