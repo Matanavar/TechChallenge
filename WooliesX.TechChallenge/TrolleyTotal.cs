@@ -38,10 +38,13 @@ namespace WooliesX.TechChallenge
                 {
                     //throw bad request
                 }
-                
+
+              
 
                 string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
                 var reqProduct = JsonConvert.DeserializeObject<TrolleyCalc>(requestBody);
+                log.LogInformation(requestBody);
+
 
                 var responseMsg = _productManager.GetTrolleyTotal(reqProduct);
                 return new OkObjectResult(responseMsg);
