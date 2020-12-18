@@ -32,7 +32,7 @@ namespace WooliesX.TechChallenge
                 .AddEnvironmentVariables()
                 .Build();
 
-            builder.Services
+            builder.Services 
                 .AddTransient<IUserManager, UserManager>()
                  .AddTransient<IProductManager, ProductManager>()
                  .AddTransient<IResourceService, ResourceService>();

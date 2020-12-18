@@ -34,6 +34,12 @@ namespace WooliesX.TechChallenge
         {
             try
             {
+                if(req.Body == null)
+                {
+                    //throw bad request
+                }
+                
+
                 string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
                 var reqProduct = JsonConvert.DeserializeObject<TrolleyCalc>(requestBody);
 

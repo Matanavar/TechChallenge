@@ -50,7 +50,7 @@ namespace WooliesX.TechChallenge.Entities
     }
 
     public static class ProductHelper
-    {
+    {        
         public static List<Product> Sort(List<Product> products, SortEnum sortVal)
         {
             List<Product> sortedProductList;
@@ -72,7 +72,6 @@ namespace WooliesX.TechChallenge.Entities
                 case SortEnum.Descending:
                     sortedProductList = products.OrderByDescending(p => p.Name).ToList();
                     break;
-
                 default:
                     sortedProductList = products;
                     break;

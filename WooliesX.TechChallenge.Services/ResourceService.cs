@@ -37,5 +37,7 @@ namespace WooliesX.TechChallenge.Services
 
             return HttpClientUtil.Post<decimal>(resourceBaseUrl + UrlPathTrolleyCalculator + "?token=" + resourceToken, content).Result;
         }
+
+
     }
 }
